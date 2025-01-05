@@ -40,7 +40,8 @@ class MyScreen(ModalScreen):
 class Cell(Widget):
     
     state = reactive(PlayerState.EMPTY)
-    x = r"""\_/ 
+    x = r"""
+\_/ 
 / \ """
     o = r""" __ 
 /  \
