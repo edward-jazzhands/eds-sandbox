@@ -1,3 +1,8 @@
+# Tic-Tac-Toe with AI and variable grid size, built with Textual.
+# This is a standalone script. You can copy and paste this file into
+# any environment that has Textual installed and run it directly.
+# No dependencies are required other than Textual.
+
 from __future__ import annotations
 from enum import Enum
 from copy import deepcopy
