@@ -343,7 +343,7 @@ class GameManager(Widget):
             | is_maximizing | - True if AI's turn (maximizing), False if human's turn (minimizing)
 
             Returns:
-                tuple[int, int, int]: (best_score, best_row, best_col)"""
+                tuple[int, tuple[int, int]]: best_score, (best_move coordinates)"""
 
         self.minimax_counter += 1
 
