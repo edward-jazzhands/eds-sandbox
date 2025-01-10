@@ -300,7 +300,13 @@ class GameManager(Widget):
     async def computer_turn_worker(self, board: list[list[int]]) -> tuple[int, int]:
 
         await sleep(0.5)            # Artificial delay to simulate thinking time
-        _, best_move = self.minimax(board, depth=0, is_maximizing=True)    # AI is maximizer
+        _, best_move = self.minimax(
+            board,
+            depth=0,
+            alpha = float('-inf'),
+            beta = float('inf'), 
+            is_maximizing=True           # AI is maximizer
+        ) 
         return best_move
 
     #* Called by: cell_pressed in this class.
@@ -333,8 +339,8 @@ class GameManager(Widget):
         board: list[list[int]],
         depth: int,
         is_maximizing: bool,
-        alpha: int = float('-inf'),
-        beta: int = float('inf')
+        alpha: float,
+        beta: float
     ) -> tuple[int, tuple[int, int]]:       # score, best_move coordinates
         """ | Arg           | Description 
             |---------------|---------------------
