@@ -210,7 +210,7 @@ class GameManager(Widget):
             super().__init__()
             self.value = value
 
-    #* Sent by: calculate_winner in this class.
+    #* Sent by: cell_pressed, computer_turn_orch in this class.
     #* Handled by: game_over in main App.
     class GameOver(Message):
         def __init__(self, result: PlayerState):
