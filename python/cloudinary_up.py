@@ -16,6 +16,9 @@
 from typing import Dict
 from pathlib import Path
 from rich.progress import track
+from rich.progress import Progress
+from rich.console import Console
+console = Console()
 
 import cloudinary
 import cloudinary.uploader
@@ -55,36 +58,38 @@ except:
     raise FileNotFoundError(f"Directory {dir_path_str} does not exist.")
 
 files = {f.stem: f for f in directory_path.iterdir() if f.is_file()}
-print("Files in the directory:")
+console.log("[green]Files in the directory:[/green]")
 for key, value in files.items():
-    print(key, ":", value)
+    console.log(f"[yellow]{key}[/yellow] : {value}")
 
 
 #########################
 #~   Upload Pictures   ~#
 #########################
 
-
 secure_urls = {}
 for key in track(files, description="Uploading images..."):
-    value = files[key]
+    path = files[key]
     upload_result: Dict = cloudinary.uploader.upload(
-        value,
+        path,
         public_id = key,
         asset_folder = dir_path_str,
         use_asset_folder_as_public_id_prefix = True
     )
-    secure_urls[key] = upload_result["secure_url"]
+    fixed_public_id = upload_result["public_id"] # returns the public id with the asset folder prefix
+    secure_urls[fixed_public_id] = upload_result["secure_url"]
 
 
 optimized_urls = {}
-for key in track(secure_urls, description="Optimizing images..."):
-    value = secure_urls[key]
+for key in secure_urls.keys():
     optimize_url, _ = cloudinary_url(key, fetch_format="auto", quality="auto")
     optimized_urls[key] = optimize_url
 
-
-# print the optimized urls to a file inside the original directory_path
-with open(directory_path / "optimized_urls.txt", "w") as f:
+# print the optimized urls to a file
+console.log("[green]Optimized URLs:[/green]")
+with open(f"{dir_path_str}.txt", "w") as f:
     for key, value in optimized_urls.items():
         f.write(f"{key}: {value}\n")
+        console.log(f"[yellow]{key}[/yellow] : {value}")
+
+console.log(f"[green]Optimized URLs saved to [cyan]{dir_path_str}.txt")
