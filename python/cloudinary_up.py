@@ -1,5 +1,6 @@
 # Cloudinary uploader script
 # By Edward Jazzhands
+# Version: 1.0
 # ----------------------------
 # This script uploads images from a directory to Cloudinary,
 # then returns a list of optimized URLs for the images.
