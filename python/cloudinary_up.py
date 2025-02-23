@@ -10,7 +10,8 @@
 # 4. Enter the directory path when prompted.
 
 # The script will upload the images to Cloudinary, then return a list of optimized URLs.
-# The optimized URLs are saved to a file called "optimized_urls.txt" in the same directory as the images.
+# The optimized URLs are saved to a file called {dir_path_str}.txt (folder containing 
+# the images) in the same directory as this script.
 
 
 from typing import Dict
