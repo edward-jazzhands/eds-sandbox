@@ -1,0 +1,20 @@
+# Create and sync the virtual environment
+install:
+	uv sync
+
+run script:
+	uv run {{script}}
+
+run-dev script:
+	uv run textual run --dev {{script}}
+
+console:
+	uv run textual console -x EVENT -x SYSTEM
+
+tmux script:
+	chmod +x tmux.sh
+	./tmux.sh {{script}}
+
+del-env:
+	rm -rf .venv
+	rm -rf uv.lock

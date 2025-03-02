@@ -12,7 +12,7 @@ class MyWidget(Widget):
         self.loading = True
 
     def compose(self):
-        yield Label("Hello world.")
+        yield Label("Your Textual App Here")
 
     def on_mount(self):
         self.call_after_refresh(self.init)
@@ -26,7 +26,7 @@ class MyApp(App):
 
     DEFAULT_CSS = """MyWidget {
     width: 1fr; height: 1fr; content-align: center middle; align: center middle;
-    }"""
+    } Label { background: $surface; padding: 2;}"""
 
     def compose(self):
         yield Header()
