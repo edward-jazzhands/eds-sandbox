@@ -21,7 +21,7 @@ traceback.install()
 # ~ Modify these five lines ~ #
 ###############################
 
-splash_text = "Chezmoi Mousse"   # It will auto wrap the text based on the terminal width when launching.
+splash_text = "Hey john whats up"   # It will auto wrap the text based on the terminal width when launching.
 font = "ansi_shadow"
 gradient_color_1 = "hotpink"
 gradient_color_2 = "blue"

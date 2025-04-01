@@ -13,7 +13,7 @@ class SpinnerWidget(Static):
         self._spinner = Spinner(spinner, text)  
 
     def on_mount(self) -> None:
-        self.update_render = self.set_interval(1 / 60, self.update_spinner)
+        self.set_interval(0.02, self.update_spinner)
 
     def update_spinner(self) -> None:
         self.update(self._spinner)
