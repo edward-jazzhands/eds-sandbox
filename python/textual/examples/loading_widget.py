@@ -1,3 +1,5 @@
+# This script demonstrates how a widget can be initialized with a loading state
+# and then updated after a delay (simulating the time taken to boot up the app).
 
 from textual.app import App
 from textual import work
