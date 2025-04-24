@@ -2,7 +2,7 @@
 # which can be dragged around the screen using the mouse.
 
 from textual.app import App
-from textual.events import MouseUp, MouseDown, MouseMove
+import textual.events as events
 from textual.widgets import Footer, Static
 from textual.containers import Container
 from textual.geometry import Offset
@@ -14,35 +14,50 @@ class DragContainer(Container):
     BORDER_TITLE = "Drag Me"
     mouse_status: Reactive[bool] = Reactive[bool](False)
 
+    _current_layer = 0  # Class variable to track the next available layer
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        current_layers = self.app.screen.layers
-        if "drag_container" not in current_layers:
+        self.layer_index = DragContainer._current_layer
+        DragContainer._current_layer += 1
+
+    def on_compose(self) -> None:
+
+        current_layers = self.screen.layers
+        if f"drag_container{self.layer_index}" not in current_layers:
             layers = [layer for layer in current_layers if not layer.startswith("_")]
-            new_layers = tuple(layers) + ("drag_container",)
-            self.app.screen.styles.layers = new_layers  # type: ignore  |  Pylance complains but this is fine.
+            layers.extend([f"drag_container{self.layer_index}"])
+            self.log(f"new layers: {layers}")
+            self.screen.styles.layers = tuple(layers)       # type: ignore
+        self.styles.layer = f"drag_container{self.layer_index}"
 
-        self.styles.layer = "drag_container"
-        self.can_focus = True
 
-    def compose(self):
-        yield Static("Placeholder", id="placeholder")
+    def on_mouse_move(self, event: events.MouseMove) -> None:
 
-    def on_mouse_up(self, event: MouseUp) -> None:
-        self.mouse_status = False   
+        self.log(f"delta_x: {event.delta_x} | delta_y: {event.delta_y}")
 
-    def on_mouse_down(self, event: MouseDown) -> None:
-        self.mouse_status = True
-
-    def on_leave(self) -> None:
-        self.mouse_status = False
-        
-    def on_mouse_move(self, event: MouseMove) -> None:
-
-        if self.mouse_status:
+        # self.app.mouse_captured refers to the widget that is currently capturing mouse events.
+        # Thus, we can check if that variable is equal to this widget. Easy, no flags needed.
+        if self.app.mouse_captured == self:
             self.offset = Offset(self.offset.x + event.delta_x, self.offset.y)
-            self.offset = Offset(self.offset.x, self.offset.y + event.delta_y)
+            self.offset = Offset(self.offset.x, self.offset.y + event.delta_y) 
+
+    async def on_mouse_down(self, event: events.MouseDown) -> None:
+
+        self.capture_mouse()
+        self.bring_forward()
+
+    async def on_mouse_up(self, event: events.MouseUp) -> None:
+
+        self.capture_mouse(False)
+
+    def bring_forward(self):
+
+        # Get all layers that are not this widget's layer:
+        layers = tuple(x for x in self.screen.styles.layers if x != self.layer)
+        # Append this widget's layer to the end of the tuple:
+        self.screen.styles.layers = layers + tuple([self.styles.layer])     # type: ignore
 
 class TextualApp(App):
 
@@ -58,8 +73,10 @@ class TextualApp(App):
     
     def compose(self):
 
-        yield DragContainer()
-        yield DragContainer()        
+        with DragContainer(id="drag_container1"):
+            yield Static("X", id="placeholder")
+        with DragContainer(id="drag_container2"):
+            yield Static("X", id="placeholder")
         with Container(id="center_content"):
             yield Static("Center placeholder", id="center_placeholder")
         yield Footer() 
