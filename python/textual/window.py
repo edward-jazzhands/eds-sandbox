@@ -1,5 +1,6 @@
 # This script is the first prototype of a floating "window" for textual
 # which can be dragged around the screen using the mouse.
+# Eventually will add stuff like resizing, closing, etc.
 
 from textual.app import App
 import textual.events as events
@@ -9,7 +10,7 @@ from textual.geometry import Offset
 from textual.reactive import Reactive
 
 
-class DragContainer(Container):
+class Window(Container):
 
     BORDER_TITLE = "Drag Me"
     mouse_status: Reactive[bool] = Reactive[bool](False)
@@ -19,8 +20,8 @@ class DragContainer(Container):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.layer_index = DragContainer._current_layer
-        DragContainer._current_layer += 1
+        self.layer_index = Window._current_layer
+        Window._current_layer += 1
 
     def on_compose(self) -> None:
 
@@ -62,7 +63,7 @@ class DragContainer(Container):
 class TextualApp(App):
 
     DEFAULT_CSS = """
-    DragContainer {
+    Window {
         border: panel $primary; width: 25; height: 10;
         background: $panel; align: center middle;
     }
@@ -73,9 +74,9 @@ class TextualApp(App):
     
     def compose(self):
 
-        with DragContainer(id="drag_container1"):
+        with Window(id="drag_container1"):
             yield Static("X", id="placeholder")
-        with DragContainer(id="drag_container2"):
+        with Window(id="drag_container2"):
             yield Static("X", id="placeholder")
         with Container(id="center_content"):
             yield Static("Center placeholder", id="center_placeholder")
