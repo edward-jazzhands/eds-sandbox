@@ -1,0 +1,6 @@
+RichLog { height: 80%; border: solid orange; background: $panel;}
+#stage_select { max-width: 80; border: solid orange; height: 10}
+#level_select { max-width: 30; border: solid orange; }
+#h { border: solid blue; }
+#v { border: solid yellow; max-width: 80; }
+#v2 { border: solid green; width: 1fr;}

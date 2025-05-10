@@ -1,8 +1,18 @@
 from textual.app import App
-from textual.widgets import Footer, RichLog
+from textual.widgets import Footer, RichLog, Log
 from textual.containers import Container
 from rich.text import Text
 import random
+
+
+class MyRichLog(RichLog):
+
+    ALLOW_SELECT = True
+
+    @property
+    def allow_select(self) -> bool:
+        return True
+
 
 class TextualApp(App):
 
@@ -12,11 +22,11 @@ class TextualApp(App):
     RichLog { border: solid blue; width: 50%; height: 1fr}
 
     """
-    
+
     def compose(self):
 
         with Container(id="my_container"):
-            yield RichLog(markup=True, highlight=True)
+            yield MyRichLog(markup=True, highlight=True)
         yield Footer()
 
     def on_ready(self):
@@ -28,6 +38,7 @@ class TextualApp(App):
         colors = ["red", "green", "blue", "yellow", "cyan", "magenta"]
         color = random.choice(colors)
 
-        self.query_one(RichLog).write(f"Hello, [bold {color}]world!")
+        self.query_one(MyRichLog).write(f"Hello, [bold {color}]world!")
+
 
 TextualApp().run()
