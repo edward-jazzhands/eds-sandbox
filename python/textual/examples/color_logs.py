@@ -3,7 +3,7 @@
 from textual.app import App
 from rich.text import Text
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
     def on_ready(self):
 

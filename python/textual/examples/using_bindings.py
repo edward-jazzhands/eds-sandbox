@@ -2,7 +2,7 @@ from textual.app import App
 from textual.widgets import Static, Footer
 from textual.binding import Binding
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
     BINDINGS = [
         Binding("ctrl+s", "binding1", description="My Binding 1"),

@@ -4,9 +4,9 @@ from textual.app import App
 from textual.widgets import Static, Footer, Checkbox, Button
 from textual.containers import Container
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
-    DEFAULT_CSS = """
+    CSS = """
     Screen { align: center middle; }    
     #my_container { width: auto; height: auto; border: solid red;
     align: center middle; content-align: center middle; }

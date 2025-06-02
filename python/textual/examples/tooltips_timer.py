@@ -1,6 +1,8 @@
 # This script demonstrates how to create a tooltip that disappears
 # after a certain amount of time. This is achieved by monkey-patching
 # the _handle_tooltip_timer method of the Screen class in Textual.
+# Pyright / Mypy do not like this file. I'm not even gonna bother trying to
+# type hint it (I can assure you it works).
 
 from __future__ import annotations
 
@@ -40,7 +42,7 @@ def _handle_tooltip_timer(self, widget: Widget) -> None:
 
 
 # MONKEY PATCH:
-Screen._handle_tooltip_timer = _handle_tooltip_timer  # type: ignore
+Screen._handle_tooltip_timer = _handle_tooltip_timer
 
 
 class TextualApp(App[None]):

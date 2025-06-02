@@ -3,7 +3,7 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Label
 
-class ContentClick(App):
+class ContentClick(App[None]):
 
     BINDINGS = [
         ("f2", "show_note", "Show Notification"),

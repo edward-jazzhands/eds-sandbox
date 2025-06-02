@@ -1,12 +1,14 @@
 # This demonstrates how to remove the focus highlight from buttons in Textual.
+# Note that the buttons are still focusable, but they will not show the
+# default focus highlight.
 
 from textual.app import App
 from textual.widgets import Button
 from textual.containers import Container
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
-    DEFAULT_CSS = """
+    CSS = """
     #my_container { width: 1fr; height: 1fr; align: center middle; }
     .my_button {&:focus {text-style: none;}}
     """

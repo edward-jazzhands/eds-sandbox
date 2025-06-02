@@ -19,7 +19,7 @@ def render(self) -> RenderResult:
 
 HeaderClock.render = render
 
-class TextualApp(App):
+class TextualApp(App[None]):
     
     def compose(self):
 

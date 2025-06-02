@@ -35,7 +35,7 @@ class MyContainer(Container):
         self.log(self.app.app_dict)          # type: ignore 
 
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
     app_dict = {}
 

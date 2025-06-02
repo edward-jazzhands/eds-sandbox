@@ -2,13 +2,18 @@
 # The spinner object changes its rendering internally, but Textual needs to be manually updated
 # to reflect that change. This is done by using `set_interval` to call the `update_spinner` method.
 
+from __future__ import annotations
+from typing import Any, TYPE_CHECKING
+if TYPE_CHECKING:
+	from rich.console import RenderableType
 from rich.spinner import Spinner
 
 from textual.app import App
 from textual.widgets import Static
 
 class SpinnerWidget(Static):
-    def __init__(self, spinner, text, *args, **kwargs):
+
+    def __init__(self, spinner: str, text: RenderableType, *args: Any, **kwargs: Any):
         super().__init__(*args, **kwargs)
         self._spinner = Spinner(spinner, text)  
 
@@ -18,15 +23,17 @@ class SpinnerWidget(Static):
     def update_spinner(self) -> None:
         self.update(self._spinner)
 
-class MyApp(App):
+class MyApp(App[None]):
 
-    DEFAULT_CSS = ".spinner {width: 1fr; height: 1fr; content-align: center middle;}"
+    CSS = """
+        SpinnerWidget {width: 1fr; height: 1fr; content-align: center middle;}
+    """
 
     def compose(self):
-        yield SpinnerWidget("line", "Loading...", classes="spinner")
 
-    # A few common options:
-    # arc, arrow, bouncingBall, boxBounce, dots, dots2 to dots12, line
-    # python -m rich.spinner to see all options
+        yield SpinnerWidget("line", "Loading...")
+        # A few common options:
+        # arc, arrow, bouncingBall, boxBounce, dots, dots2 to dots12, line
+        # python -m rich.spinner to see all options
 
 MyApp().run()

@@ -1,8 +1,10 @@
-```py
+# This script demonstrates how to use the configparser module in a Textual application.
+
 import configparser
 from pathlib import Path
+from textual.app import App
 
-class MyTextualApp(App)
+class MyTextualApp(App[None]):
     
     def __init__(self):
         super().__init__()
@@ -14,9 +16,8 @@ class MyTextualApp(App)
         self.config = configparser.ConfigParser()  # Available globally as self.app.config
         self.config.read(config_path)
 
-        ##~ Config settings ~##
+        ## Config settings ##
         self.my_string_foo  = self.config.get("MAIN", "my_string_foo")
         self.my_boolean_foo = self.config.getboolean("MAIN", "my_boolean_foo")
         self.my_integer_foo = self.config.getint("MAIN", "my_integer_foo")
         self.my_float_foo   = self.config.getfloat("MAIN", "my_float_foo")
-```

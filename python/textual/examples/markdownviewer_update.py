@@ -1,5 +1,5 @@
-# This script demonstrates how the content of the MarkdownViewer widget can be updated
-# using the `document.update()` method.
+# This script demonstrates how the content of the MarkdownViewer widget
+# can be upated using the `document.update()` method.
 
 from textual import on
 from textual.app import App, ComposeResult
@@ -34,7 +34,7 @@ MARKDOWN2 = """\
 # Header 2
 """
 
-class MarkdownExampleApp(App):
+class MarkdownExampleApp(App[None]):
 
     def compose(self) -> ComposeResult:
 

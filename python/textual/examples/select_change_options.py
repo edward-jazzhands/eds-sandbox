@@ -4,7 +4,7 @@ from textual.app import App
 from textual.widgets import Select, Button
 from textual.containers import Container
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
     DEFAULT_CSS = """
     #my_container { width: 1fr; height: 1fr; align: center middle; }
