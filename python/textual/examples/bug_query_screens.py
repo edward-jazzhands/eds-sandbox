@@ -15,7 +15,7 @@ from textual.screen import Screen
 class MainScreen(Screen[None]):
 
     def compose(self) -> ComposeResult:
-        yield Static("Main Screen Content")
+        yield Static("Main Screen Content", id="main_static")
         yield Button("Press Me", id="main_button")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
@@ -39,6 +39,8 @@ class TuiApp(App[None]):
 
         main_screen = self.get_screen("main")    # <-- Do this instead
         self.notify(f"{main_screen is self.screen}")   # This shows that main_screen is the same as self.screen 
+
+        main_screen.query_one("#main_static", Static).update("Path Entered!")
 
 
 if __name__ == "__main__":
