@@ -5,7 +5,7 @@ from textual.containers import Container
 
 class TextualApp(App[None]):
 
-    DEFAULT_CSS = """
+    CSS = """
     Screen { align: center middle; }
     #my_static { border: solid blue; width: auto;}
     """

@@ -1,9 +1,9 @@
 from textual.app import App
 from textual.widgets import Footer
 
-class TextualApp(App):
+class TextualApp(App[None]):
 
-    DEFAULT_CSS = """
+    CSS = """
     /* any needed CSS  here */
     """
 
