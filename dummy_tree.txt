@@ -1,0 +1,24 @@
+/project_root
+├── /assets
+│   ├── /images
+│   │   ├── logo.png
+│   │   └── background.jpg
+│   └── /icons
+│       └── favicon.ico
+├── /src
+│   ├── /components
+│   │   ├── Button.js
+│   │   ├── Navbar.js
+│   │   └── Footer.js
+│   ├── /pages
+│   │   ├── HomePage.js
+│   │   ├── AboutPage.js
+│   │   └── ContactPage.js
+│   ├── App.js
+│   └── index.js
+├── /public
+│   ├── index.html
+│   └── manifest.json
+├── package.json
+├── package-lock.json
+└── README.md
