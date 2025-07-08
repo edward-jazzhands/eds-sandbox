@@ -3,6 +3,12 @@
 # the functionality of both `Widget` and `ABC`. This allows you to define
 # abstract methods that must be implemented by any subclass of the widget.
 
+# Note that I would not recommend doing this in general. It causes too
+# many issues with the Textual framework, such as preventing workers
+# from functioning correctly, and it can lead to unexpected behavior.
+# But its useful to keep this example up just as a demonstration of
+# how one would do it.
+
 from abc import ABC, abstractmethod
 from textual.widget import Widget
 from textual.app import App, ComposeResult
