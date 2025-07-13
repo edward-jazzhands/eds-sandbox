@@ -1,3 +1,8 @@
+# This example demonstrates how to create a sortable DataTable
+# with headers that change their appearance based on the sorting state.
+# The arrows in the header label will flip direction when the user clicks
+# on a header to indicate the current sort order.
+
 # python standard lib
 from __future__ import annotations
 
@@ -51,7 +56,7 @@ class TableApp(App[None]):
 
         # Retrieving the actual column from `DataTable.ordered_columns` is the trick
         # to making this work. This is different from `DataTable.get_column`, which
-        # returns the values of the column key, not the actual column object.
+        # returns the values of the column, not the actual column object.
         # You need the column object to modify its label.  
 
         col_index = self.datatable.get_column_index("time")
