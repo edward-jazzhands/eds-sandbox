@@ -1,6 +1,5 @@
 from textual.app import App
-from textual.widgets import Static, Footer, Button
-from textual.containers import Container
+from textual.widgets import Static, Footer
 
 
 class TextualApp(App[None]):
@@ -10,22 +9,16 @@ class TextualApp(App[None]):
     #my_static { border: solid blue; width: auto;}
     """
 
+    BINDINGS = [
+        ("b", "binding", "My Binding Foo"),
+    ]
+
     def compose(self):
 
-        with Container(id="my_container"):
-            yield Static("Hello, Textual!", id="my_static")
-            yield Button("press me", classes="some-tcss-class")
-
+        yield Static("Hello, Textual!", id="my_static")
         yield Footer()
 
-    # def on_button_pressed(self):
-    #     self.log(self.screen._compositor.render_update(full=True))
-
-    def on_mount(self):
-        button = self.query_one("Button.some-tcss-class", Button)
-        self.notify(f"Button found: {button.classes}")
-        button.styles.background = "red"
-
-
+    def action_binding(self):
+        self.notify("You pressed the 'b' key!")
 
 TextualApp().run()

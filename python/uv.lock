@@ -488,7 +488,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "rich-pixels", specifier = ">=3.0.1" },
-    { name = "textual", specifier = ">=3.3.0" },
+    { name = "textual", specifier = ">=3.7.1" },
     { name = "textual-coloromatic", specifier = ">=0.1.4" },
 ]
 
@@ -555,7 +555,7 @@ wheels = [
 
 [[package]]
 name = "textual"
-version = "3.7.0"
+version = "4.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown-it-py", extra = ["linkify", "plugins"] },
@@ -563,9 +563,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e3/71/78d56783bbf7f77b635d3e3debd4deca52449ea1bfd2f4f0c1204f3d59d4/textual-3.7.0.tar.gz", hash = "sha256:d5cb710b4691a2d9b9075ff2dc9ebecf2d8369c893af3354dad344960c91d7c9", size = 1603085, upload-time = "2025-07-07T20:55:17.167Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f1/22/a2812ab1e5b0cb3a327a4ea79b430234c2271ba13462b989f435b40a247d/textual-4.0.0.tar.gz", hash = "sha256:1cab4ea3cfc0e47ae773405cdd6bc2a17ed76ff7b648379ac8017ea89c5ad28c", size = 1606128, upload-time = "2025-07-12T09:41:20.812Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/21/aa/d76e57eea60baabda1bc64e8fabdc1bf540dded3d5034c9f07462505e61d/textual-3.7.0-py3-none-any.whl", hash = "sha256:761352ada0427ef7e5405c0b01d9df6fafd773cba09338955249a8b45988c3fc", size = 691342, upload-time = "2025-07-07T20:55:15.421Z" },
+    { url = "https://files.pythonhosted.org/packages/d8/e4/ebe27c54d2534cc41d00ea1d78b783763f97abf3e3d6dd41e5536daa52a5/textual-4.0.0-py3-none-any.whl", hash = "sha256:214051640f890676a670aa7d29cd2a37d27cfe6b2cf866e9d5abc3b6c89c5800", size = 692382, upload-time = "2025-07-12T09:41:18.828Z" },
 ]
 
 [[package]]
