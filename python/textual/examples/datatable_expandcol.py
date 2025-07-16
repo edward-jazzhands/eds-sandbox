@@ -44,8 +44,7 @@ class MyDataTable(DataTable):
         # Pretty obvious how this works I think:
         first_col_width = self.size.width - self.other_cols_total - total_cell_padding
 
-        # This is a safety in case the user's terminal is so tiny that 
-        # the first column would be less than our chosen minimum (15):
+        # Prevent column from being smaller than the chosen minimum:
         if first_col_width < self.col1_minimum:
             first_col_width = self.col1_minimum
 
@@ -56,8 +55,8 @@ class MyDataTable(DataTable):
 class TextualApp(App[None]):
 
     def compose(self) -> ComposeResult:
-        with Container(id="datatable_container"):
-            yield MyDataTable(id="main_table")
+        with Container():
+            yield MyDataTable()
 
 
 TextualApp().run()
