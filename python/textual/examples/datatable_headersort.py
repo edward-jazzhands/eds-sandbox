@@ -5,12 +5,14 @@
 
 # python standard lib
 from __future__ import annotations
+from typing import Any
+from enum import Enum
 
 # Textual imports
 from textual import on
 from textual.app import App, ComposeResult
 from textual.widgets import DataTable
-from textual.widgets.data_table import CellType, Column, ColumnKey
+from textual.widgets.data_table import Column, ColumnKey
 from textual.containers import Container
 from rich.text import Text
 
@@ -27,6 +29,12 @@ ROWS = [
     (10, "Darren Burns", "Scotland", 51.84),
 ]
 
+class SortingStatus(Enum):
+    UNSORTED = 0  #     [-] unsorted
+    ASCENDING = 1  #    [↑] ascending (reverse = True)
+    DESCENDING = 2  #   [↓] descending (reverse = False)
+
+
 class TableApp(App[None]):
 
     DEFAULT_CSS = """
@@ -34,15 +42,15 @@ class TableApp(App[None]):
     DataTable { width: 60; height: auto; }
     """
 
-    sorting_statuses_dict: dict[str, int] = {
-        "lane": 0,  #      0 = [-] unsorted
-        "swimmer": 0,  #   1 = [↑] ascending (reverse = True)
-        "country": 0,  #   2 = [↓] descending (reverse = False)
-        "time": 0,
+    sorting_statuses_dict: dict[str, SortingStatus] = {
+        "lane": SortingStatus.UNSORTED,
+        "swimmer": SortingStatus.UNSORTED, 
+        "country": SortingStatus.UNSORTED, 
+        "time": SortingStatus.UNSORTED,
     }
 
     def compose(self) -> ComposeResult:
-        self.datatable = DataTable[CellType]() # type: ignore
+        self.datatable = DataTable[Any]()
         with Container(id="datatable_container"):
             yield self.datatable
 
@@ -54,19 +62,18 @@ class TableApp(App[None]):
         self.datatable.add_column("time [yellow]-[/]", key="time")
         self.datatable.add_rows(ROWS)
 
-        # Retrieving the actual column from `DataTable.ordered_columns` is the trick
+        # Retrieving the actual column from `DataTable.columns` is the trick
         # to making this work. This is different from `DataTable.get_column`, which
         # returns the values of the column, not the actual column object.
         # You need the column object to modify its label.  
 
-        col_index = self.datatable.get_column_index("time")
-        column = self.datatable.ordered_columns[col_index]
+        column = self.datatable.columns[ColumnKey("time")]
         self.sort_column(column, column.key)
 
     @on(DataTable.HeaderSelected)
     def header_selected(self, event: DataTable.HeaderSelected) -> None:
               
-        column = self.datatable.ordered_columns[event.column_index]
+        column = self.datatable.columns[event.column_key]
         self.sort_column(column, column.key)
     
     def sort_column(self, column: Column, column_key: ColumnKey) -> None:
@@ -81,27 +88,27 @@ class TableApp(App[None]):
         sort_status = self.sorting_statuses_dict
         table = self.datatable
 
-        if sort_status[key] == 0:
+        if sort_status[key] == SortingStatus.UNSORTED :
             # if column is unsorted, that means the user is switching which
             # column to sort. Start by resetting all columns to unsorted.
             for col_key in sort_status:
-                sort_status[col_key] = 0
+                sort_status[col_key] = SortingStatus.UNSORTED
                 col_index = table.get_column_index(col_key)
                 col = table.ordered_columns[col_index]
                 col.label = Text.from_markup(f"{col_key} [yellow]-[/]")
 
             # Now set chosen column to ascending:
-            sort_status[key] = 1
+            sort_status[key] = SortingStatus.ASCENDING
             table.sort(column_key, reverse=True)
             column.label = Text.from_markup(f"{key} [yellow]↑[/]")
 
         # For the other two conditions, we just toggle ascending/descending
-        elif sort_status[key] == 1:  # if ascending
-            sort_status[key] = 2  #    set to descending
+        elif sort_status[key] == SortingStatus.ASCENDING:
+            sort_status[key] = SortingStatus.DESCENDING 
             table.sort(key, reverse=False)
             column.label = Text.from_markup(f"{key} [yellow]↓[/]")
-        elif sort_status[key] == 2:  # if descending
-            sort_status[key] = 1  #    set to ascending
+        elif sort_status[key] == SortingStatus.DESCENDING: 
+            sort_status[key] = SortingStatus.ASCENDING  
             table.sort(column_key, reverse=True)
             column.label = Text.from_markup(f"{key} [yellow]↑[/]")
         else:

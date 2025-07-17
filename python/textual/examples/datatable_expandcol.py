@@ -3,6 +3,9 @@
 # fixed widths. The table will also auto-adjust the first column's width
 # when the terminal is resized.
 
+from typing import Any
+
+
 from textual.widgets import DataTable
 from textual.widgets.data_table import ColumnKey
 from textual.app import App, ComposeResult
@@ -20,7 +23,7 @@ ROWS = [
     ("Darren Burns", "Scotland", 51.84, 10),
 ]
 
-class MyDataTable(DataTable):
+class MyDataTable(DataTable[Any]):
 
     col1_minimum = 15   # dynamic column
     col2_width = 20
