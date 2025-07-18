@@ -1,3 +1,8 @@
+# This file demonstrates how to use the rich traceback feature
+# in a Textual application to log errors to a file and display them
+# in HTML format. The application includes a button that, when pressed,
+# will intentionally cause an error, triggering the logging mechanism.
+
 # Python standard lib
 from datetime import datetime
 # Textual and Rich
