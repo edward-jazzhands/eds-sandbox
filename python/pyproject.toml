@@ -5,15 +5,17 @@ description = "Eds Sandbox python environment"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "ipykernel>=6.30.0",
     "markdown-it-py>=3.0.0",
     "pyfiglet>=1.0.2",
     "pyyaml>=6.0.2",
     "requests>=2.32.3",
     "rich-pixels>=3.0.1",
-    "textual>=3.7.1",
+    "textual>=5.0.0",
     # "textual-pyfiglet>=0.5.5",
     # "textual-slidecontainer>=0.1.0",
     "textual-coloromatic>=0.1.4",
+    "typer>=0.16.0",
 ]
 
 [dependency-groups]

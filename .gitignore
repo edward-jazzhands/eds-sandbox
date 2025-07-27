@@ -9,5 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# jupyter notebooks
+*.ipynb
+
 python/textual/mres/
 *CodeRunner*
+*.log
