@@ -1,4 +1,4 @@
-from textual.app import App
+from textual.app import App, ComposeResult
 from textual.widgets import Static, Footer
 
 
@@ -13,12 +13,12 @@ class TextualApp(App[None]):
         ("b", "binding", "My Binding Foo"),
     ]
 
-    def compose(self):
+    def compose(self) -> ComposeResult:
 
         yield Static("Hello, Textual!", id="my_static")
         yield Footer()
 
-    def action_binding(self):
+    def action_binding(self) -> None:
         self.notify("You pressed the 'b' key!")
 
 TextualApp().run()

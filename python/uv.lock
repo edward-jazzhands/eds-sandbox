@@ -761,7 +761,6 @@ dependencies = [
     { name = "requests" },
     { name = "rich-pixels" },
     { name = "textual" },
-    { name = "textual-coloromatic" },
     { name = "typer" },
 ]
 
@@ -778,8 +777,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "rich-pixels", specifier = ">=3.0.1" },
-    { name = "textual", specifier = ">=5.0.0" },
-    { name = "textual-coloromatic", specifier = ">=0.1.4" },
+    { name = "textual", specifier = ">=5.0.1" },
     { name = "typer", specifier = ">=0.16.0" },
 ]
 
@@ -948,19 +946,6 @@ wheels = [
 ]
 
 [[package]]
-name = "textual-coloromatic"
-version = "0.2.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "textual" },
-    { name = "textual-slidecontainer" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/aa/a6881bb0f6b6d0704cbc62718086155fd83ee0393affef61ed7927ab740f/textual_coloromatic-0.2.2.tar.gz", hash = "sha256:514636f5273d2db63934260785b7382fd75b041770d251c87595498c2a0aeee7", size = 105614, upload-time = "2025-06-24T11:29:17.55Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/c9/41fa61960f5bff3e9a0756e62157290c7de8f04430bb78f724b24e70d096/textual_coloromatic-0.2.2-py3-none-any.whl", hash = "sha256:7fd416a0303d0ca93ee110f61d6cee688da012d5cdf3ee6fadfefd0c81561331", size = 36291, upload-time = "2025-06-24T11:29:15.773Z" },
-]
-
-[[package]]
 name = "textual-dev"
 version = "1.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -991,18 +976,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/27/41/09d5695b050d592ff58422be2ca5c9915787f59ff576ca91d9541d315406/textual_serve-1.1.2.tar.gz", hash = "sha256:0ccaf9b9df9c08d4b2d7a0887cad3272243ba87f68192c364f4bed5b683e4bd4", size = 892959, upload-time = "2025-04-16T12:11:41.746Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/7c/fb/0006f86960ab8a2f69c9f496db657992000547f94f53a2f483fd611b4bd2/textual_serve-1.1.2-py3-none-any.whl", hash = "sha256:147d56b165dccf2f387203fe58d43ce98ccad34003fe3d38e6d2bc8903861865", size = 447326, upload-time = "2025-04-16T12:11:43.176Z" },
-]
-
-[[package]]
-name = "textual-slidecontainer"
-version = "0.5.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "textual" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fe/f2/62381768399bc15036642ebc24101b72521a328c21d625fc2a5c79b64221/textual_slidecontainer-0.5.2.tar.gz", hash = "sha256:c206cc629acfba729a3c300fbdc4690326bf6f33bf102a7bebd31d0794ab6c55", size = 88503, upload-time = "2025-06-17T12:39:37.51Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/d4/8be85bf085bd6408eebe60705af865b2eb41d9144e447f2eed7798bcc89b/textual_slidecontainer-0.5.2-py3-none-any.whl", hash = "sha256:013d29f8ec2ec5b809eba88370389c9ad001a9c339e611ff576690739e95fbd8", size = 10252, upload-time = "2025-06-17T12:39:36.382Z" },
 ]
 
 [[package]]
